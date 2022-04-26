@@ -2,8 +2,35 @@
 #include <vector>
 #include "abb.h"
 
-using namespace std;
+template <typename T>
+Abb<T> unionAbb(const Abb<T>& A, const Abb<T>& B){
 
+    Abb<T> Nuevo = A;
+    RecorrerUnionAbb(Nuevo,B);  
+    equilibrar(Nuevo);
+
+    return Nuevo;
+
+}
+
+template <typename T>
+void RecorrerUnionAbb(Abb<T>& A,const Abb<T>& B){
+
+    if(!B.vacio()){
+
+        if(A.buscar(B.elemento()).vacio()){
+            A.insertar(B.elemento());
+        }
+
+        RecorrerUnionAbb(A,B.izqdo());
+        RecorrerUnionAbb(A,B.drcho());
+
+    }
+
+    
+}
+
+using namespace std;
 
 template <typename T>
 void equilibrar(Abb<T>& A){
@@ -43,5 +70,3 @@ void equilibrarAbb(int inicio,int fin, const vector<T>& v, Abb<T>& A){
     equilibrarAbb((inicio + fin)/2,fin,v,A);
 
 }
-
-

@@ -39,31 +39,7 @@ void podaAgen_Rec(int x, typename Agen<T>::nodo n, Agen<T>& A){
 template <typename T>
 void funcionPoda(typename Agen<T>::nodo n, Agen<T>& A){
 
-    if(A.hijoIzqdo(n)==Agen<T>::NODO_NULO){
-
-        if(n == A.raiz(){
-
-            A.eliminarRaiz();
-
-        }else if(n == A.hijoIzqdo(A.padre(n))){
-
-            A.eliminarHijoIzqdo(A.padre(n));
-
-        }else{
-            //Tenemos que buscarlo dentro de los distintos hijos de su padre
-            typename Agen<T>::nodo hijo = A.hijoIzqdo(A.padre(n));
-            while(hijo != n){
-
-                hijo = A.hermDrcho(hijo);
-                
-            }
-
-            A.eliminarHermDrcho(hijo);
-
-        }
-        
-
-    }else{
+    if(A.hijoIzqdo(n)!=Agen<T>::NODO_NULO){
 
         typename Agen<T>::nodo hijo = A.hijoIzqdo(n);
         
@@ -71,7 +47,31 @@ void funcionPoda(typename Agen<T>::nodo n, Agen<T>& A){
             funcionPoda(hijo,A);
             hijo = A.hermDrcho(hijo);
         }
+        
 
     }
+
+    if(n == A.raiz(){
+
+        A.eliminarRaiz();
+
+    }else if(n == A.hijoIzqdo(A.padre(n))){
+
+        A.eliminarHijoIzqdo(A.padre(n));
+
+    }else{
+        //Tenemos que buscarlo dentro de los distintos hijos de su padre
+        typename Agen<T>::nodo hijo = A.hijoIzqdo(A.padre(n));
+        while(A.hermDrcho(hijo) != n){
+
+            hijo = A.hermDrcho(hijo);
+            
+        }
+
+        A.eliminarHermDrcho(hijo);
+
+    }
+
+    
 
 }

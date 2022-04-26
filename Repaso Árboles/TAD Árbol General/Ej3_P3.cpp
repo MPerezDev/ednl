@@ -70,7 +70,7 @@ int calcularDesequilibrio(typename Agen<T>::nodo n,Agen<T>& A){
 template <typename T>
 int alturaNodo(typename Agen<T>::nodo n, Agen<T>& A){
     if(n==Agen<T>::NODO_NULO){
-        return 0;
+        return -1;
     }else if(A.hijoIzqdo(n)==Agen<T>::NODO_NULO){
         return 0;
     }else{
